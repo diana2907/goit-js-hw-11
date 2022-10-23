@@ -68,23 +68,29 @@ async function onLoad(entries) {
     } else {
       page += 1;
 
-      fetchImages(value, page).then(data => {
-        const arr = data.data.hits;
-        if (!value) {
-          gallery.innerHTML = '';
-          return;
-        } else if (page >= 2) {
-          quantity += arr.length;
-          gallery.insertAdjacentHTML('beforeend', markup(arr));
-          ligthbox.refresh();
-        }
-        if (quantity >= data.data.totalHits) {
-          observer.unobserve(guard);
+      fetchImages(value, page)
+        .then(data => {
+          const arr = data.data.hits;
+          if (!value) {
+            gallery.innerHTML = '';
+            return;
+          } else if (page >= 2) {
+            quantity += arr.length;
+            gallery.insertAdjacentHTML('beforeend', markup(arr));
+            ligthbox.refresh();
+          }
+          if (quantity === data.data.totalHits) {
+            observer.unobserve(guard);
+            Notify.info(
+              "We're sorry, but you've reached the end of search results."
+            );
+          }
+        })
+        .catch(error =>
           Notify.info(
             "We're sorry, but you've reached the end of search results."
-          );
-        }
-      });
+          )
+        );
     }
   });
 }
