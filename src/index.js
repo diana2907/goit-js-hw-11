@@ -16,6 +16,7 @@ const ligthbox = new SimpleLightbox('.gallery a', {
   close: true,
   spinner: true,
 });
+
 let value = '';
 let page = 0;
 let quantity = 0;
