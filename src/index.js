@@ -50,7 +50,6 @@ async function searchImages(e) {
         ligthbox.refresh();
       }
       observer.observe(guard);
-      console.log(arr);
     });
   }
 }
@@ -85,9 +84,6 @@ async function onLoad(entries) {
             "We're sorry, but you've reached the end of search results."
           );
         }
-        console.log(quantity);
-        console.log(data.data);
-        console.log(entry);
       });
     }
   });
